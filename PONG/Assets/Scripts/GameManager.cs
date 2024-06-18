@@ -10,19 +10,33 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pontuacaoatu;
     public AudioSource pont;
     public TextMeshProUGUI txtTime;
+    public GameObject Pause;
+    public GameObject FIM;
     
 
     public int temporizador;
+    public float tempcont;
     void Start()
     {
-
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+            
         txtTime.text = temporizador.ToString();
-        temporizador = 60 - (int)Time.time;
+        tempcont += Time.deltaTime;
+        temporizador = 60 - (int)tempcont;
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            pause();
+        }
+        if (temporizador == 0)
+        {
+            GameOver();
+        }
     }
     public void pontuacaoJg1()
     {
@@ -37,10 +51,24 @@ public class GameManager : MonoBehaviour
     public void pontuacaoAtu()
     {
         pontuacaoatu.text = Jogador1 + "X" + Jogador2;
-        pont.Play();
+        //pont.Play();
     }
     void pause()
     {
         Time.timeScale = 0;
+        Pause.SetActive(true);
+    }
+    public void despause()
+    {
+        Time.timeScale = 1;
+        Pause.SetActive(false);
+    }
+    public void GameOver()
+    {
+        
+        
+            Time.timeScale = 0;
+            FIM.SetActive(true);
+        
     }
 }
