@@ -8,10 +8,13 @@ public class PlayersMov : MonoBehaviour
     public bool Jogador1;
     public bool Jogador2;
     public float limiteinf, limitesup;
-    // Start is called before the first frame update
+    public float velocidade;
+    public float temporizador;
+    private Bolinha BAll;    // Start is called before the first frame update
     void Start()
     {
-        
+       
+        BAll = FindObjectOfType(typeof(Bolinha)) as Bolinha;
     }
 
     // Update is called once per frame
@@ -49,5 +52,12 @@ public class PlayersMov : MonoBehaviour
         {
             transform.Translate(Vector2.down * speed * Time.deltaTime);
         }
+
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+       
+    }
+  
+    
 }
